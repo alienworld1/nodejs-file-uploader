@@ -29,7 +29,7 @@ body {
   padding: 1.25rem 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  width: 400px;
 }
 
 h1.logo {
@@ -93,4 +93,19 @@ button:hover {
 
 .auth-link a:hover {
   text-decoration: underline;
+}
+
+.error {
+  color: #dc2626;
+  padding: 12px 8px;
+  margin: 12px 0;
+  border-radius: 10px;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.error > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }

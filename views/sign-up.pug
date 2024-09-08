@@ -4,11 +4,16 @@ block content
   .auth-form-container
     h1.logo File Uploader
     h2 Sign Up
-    form
-      input(type="text", placeholder="Username", required)
-      input(type="password", placeholder="Password", required)
-      input(type="password", placeholder="Confirm Password", required)
+    form(action="/sign-up", method="post") 
+      input(type="text", placeholder="Username", required, name="username")
+      input(type="password", placeholder="Password", required, name="password")
+      input(type="password", placeholder="Confirm Password", required, name="confirm-password")
       button(type="submit") Create Account
+    if errors 
+      .error
+        ul 
+          each error in errors 
+            li= error.msg
     .auth-link
       p 
         | Already have an account? 

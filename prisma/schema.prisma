@@ -15,7 +15,7 @@ datasource db {
 
 model User {
   id       Int      @id @default(autoincrement())
-  username String   @db.VarChar(32)
+  username String   @unique @db.VarChar(32)
   password String   @db.VarChar(40)
   folders  Folder[]
   files    File[]
@@ -42,6 +42,7 @@ model File {
   path      String   @db.VarChar(255)
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
+  size      Int
 }
 
 model Session {
