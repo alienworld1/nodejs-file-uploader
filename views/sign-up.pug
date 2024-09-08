@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  .auth-form-container
+    h1.logo File Uploader
+    h2 Sign Up
+    form
+      input(type="text", placeholder="Username", required)
+      input(type="password", placeholder="Password", required)
+      input(type="password", placeholder="Confirm Password", required)
+      button(type="submit") Create Account
+    .auth-link
+      p 
+        | Already have an account? 
+        a(href="/login") Log in here
