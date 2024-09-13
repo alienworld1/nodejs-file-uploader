@@ -19,9 +19,26 @@ body {
   margin: 0;
 }
 
+main.auth-form {
+  justify-content: center;
+  align-items: center;
+}
+
+.main-body,
+main.auth-form {
+  height: 100vh;
+  display: flex;
+  width: 100%;
+}
+
+.main-body {
+  flex-direction: column;
+}
+
 :root {
   --primary-color: #5b21b6;
   --secondary-color: #ddd6fe;
+  --third-color: #c4b5fd;
 }
 
 .auth-form-container {
@@ -104,8 +121,43 @@ button:hover {
   font-weight: 600;
 }
 
+nav ul,
 .error > ul {
   list-style-type: none;
   margin: 0;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  transition: color 0.3s ease;
+}
+
+nav ul:hover {
+  color: var(--primary-color);
+}
+
+nav ul a {
+  color: inherit;
+  text-decoration: none;
+  font-size: 1.25rem;
+}
+
+header {
+  background-color: var(--third-color);
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 32px;
+}
+
+header > h1 {
+  margin: 0;
   padding: 0;
+  font-weight: 600;
+}
+
+.main-body > main {
+  flex: 1;
+  background-color: var(--secondary-color);
 }

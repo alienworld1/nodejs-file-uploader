@@ -1,12 +1,14 @@
 const asyncHandler = require('express-async-handler');
-const { body, validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
 
+const { body, validationResult } = require('express-validator');
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
 exports.loginGet = asyncHandler(async (req, res, next) => {
-  res.render('login', { title: 'Log in' });
+  res.render('login', { title: 'Log in', errors: req.session.messages });
 });
 
 exports.signupGet = asyncHandler(async (req, res, next) => {
@@ -54,12 +56,28 @@ exports.signupPost = [
       return;
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
     await prisma.user.create({
       data: {
         username,
-        password,
+        password: hashedPassword,
       },
     });
     res.redirect('/');
   }),
 ];
+
+exports.loginPost = passport.authenticate('local', {
+  successRedirect: '/root',
+  failureRedirect: '/login',
+  failureMessage: true,
+});
+
+exports.logoutGet = asyncHandler(async (req, res, next) => {
+  req.logout(err => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/login');
+  });
+});
