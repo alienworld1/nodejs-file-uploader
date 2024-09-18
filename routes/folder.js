@@ -1,8 +1,9 @@
 const router = require('express').Router();
 
-const root = require('../controllers/root');
+const folderController = require('../controllers/folder');
 const { isAuthenticatedAsUser } = require('../middleware/auth');
 
-router.get('/', isAuthenticatedAsUser, root.rootGet);
+router.get('/', isAuthenticatedAsUser, folderController.rootGet);
+router.get('/:folderid', folderController.folderGetById);
 
 module.exports = router;

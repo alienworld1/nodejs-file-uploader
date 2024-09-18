@@ -26,11 +26,12 @@ model Folder {
   name      String   @db.VarChar(255)
   createdAt DateTime @default(now())
   parent    Folder?  @relation("hierarchy", fields: [parentId], references: [id])
-  parentId  Int
+  parentId  Int?
   subfolder Folder[] @relation("hierarchy")
   files     File[]
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
+  isRoot    Boolean  @default(false)
 }
 
 model File {
@@ -38,7 +39,7 @@ model File {
   name      String   @db.VarChar(255)
   createdAt DateTime @default(now())
   parent    Folder?  @relation(fields: [parentId], references: [id])
-  parentId  Int
+  parentId  Int?
   path      String   @db.VarChar(255)
   userId    Int
   user      User     @relation(fields: [userId], references: [id])

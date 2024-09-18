@@ -127,21 +127,22 @@ nav ul,
   margin: 0;
 }
 
-nav ul {
+header nav ul {
   display: flex;
   align-items: center;
   height: 100%;
-  transition: color 0.3s ease;
+  gap: 16px;
 }
 
-nav ul:hover {
-  color: var(--primary-color);
-}
-
-nav ul a {
+header nav ul a {
   color: inherit;
   text-decoration: none;
   font-size: 1.25rem;
+  transition: color 0.3s ease;
+}
+
+header nav ul a:hover {
+  color: var(--primary-color);
 }
 
 header {
@@ -160,4 +161,11 @@ header > h1 {
 .main-body > main {
   flex: 1;
   background-color: var(--secondary-color);
+}
+
+.no-files-main {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }

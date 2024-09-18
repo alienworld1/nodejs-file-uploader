@@ -57,10 +57,18 @@ exports.signupPost = [
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    await prisma.user.create({
+    const user = await prisma.user.create({
       data: {
         username,
         password: hashedPassword,
+      },
+    });
+
+    const root_folder = await prisma.folder.create({
+      data: {
+        name: 'Root',
+        isRoot: true,
+        userId: user.id,
       },
     });
     res.redirect('/');

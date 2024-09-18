@@ -4,7 +4,7 @@ const auth = require('../controllers/auth');
 const { isAuthenticatedAsUser } = require('../middleware/auth');
 
 router.get('/', isAuthenticatedAsUser, (req, res) => {
-  res.redirect('/root');
+  res.redirect('/folder');
 });
 
 router.get('/login', auth.loginGet);
