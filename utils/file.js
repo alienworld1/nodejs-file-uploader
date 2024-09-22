@@ -3,6 +3,7 @@
 // ! Do not store file data in Postgres directly
 
 const { PrismaClient } = require('@prisma/client');
+const { getFilesWithLinks } = require('@prisma/client/sql');
 
 const prisma = new PrismaClient();
 
@@ -18,28 +19,9 @@ exports.getRootFolder = async userid => {
 };
 
 exports.fetchFilesInFolder = async folderid => {
-  const files = await prisma.file.findMany({
-    where: {
-      parentId: folderid,
-    },
-  });
-
+  const files = await prisma.$queryRawTyped(getFilesWithLinks(folderid));
   return files;
 };
 
-exports.getFolderOwner = async folderId => {
-  const folder = await prisma.folder.findUnique({
-    where: {
-      id: folderId,
-    },
-    select: {
-      user: true,
-    },
-  });
-
-  if (!folder) {
-    throw new Error('Folder not found');
-  }
-
-  return folder.user.id;
-};
+exports.generateFolderUrl = folderid => `/folder/${folderid}/`;
+exports.generateFileUrl = fileid => `/file/${fileid}`;

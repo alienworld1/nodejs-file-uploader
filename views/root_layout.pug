@@ -7,8 +7,10 @@ block content
       nav 
         ul 
           li
-            a(href="upload-file") Upload a new file
+            a(href=folderUrl + 'upload-file') Upload a new file
           li 
             a(href="/log-out") Logout 
     main 
       block root_content 
+  if script
+    script(src=script) 

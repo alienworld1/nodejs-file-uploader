@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family:
     system-ui,
@@ -163,9 +168,175 @@ header > h1 {
   background-color: var(--secondary-color);
 }
 
-.no-files-main {
+.no-files-dialog nav ul {
   display: flex;
-  height: 100%;
-  justify-content: center;
+  gap: 16px;
+  padding: 0;
+}
+
+.button-link {
+  padding: 8px 12px;
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  transition: ease 0.3s background-color;
+}
+
+.button-link:hover {
+  background-color: #9333ea;
+  cursor: pointer;
+}
+
+.button-link > a {
+  color: #f0e6ff;
+  text-decoration: none;
+  font-size: 1.25rem;
+}
+
+.button-link > a:hover,
+.button-link > a:visited {
+  color: #f0e6ff;
+}
+
+.center-screen {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.no-files-dialog {
+  gap: 16px;
+  font-size: 1.4rem;
+}
+
+.main-body main {
+  padding: 24px;
+}
+
+.main-body main h1 {
+  text-align: center;
+}
+
+form.main-form {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 100%;
+  max-width: 500px;
+  margin: 20px;
+}
+
+form.main-form input {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 12px;
+  padding: 15px;
+  color: #333;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+form.main-form input:focus {
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(221, 214, 254, 0.5);
+}
+
+form.main-form button {
+  background: rgba(221, 214, 254, 0.3);
+  color: #4a3f8f;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+form.main-form button:hover,
+.file-input-wrapper:hover label {
+  background: rgba(221, 214, 254, 0.8);
+}
+
+.file-input-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  cursor: pointer;
+  width: 100%;
+}
+
+.file-input-wrapper input[type='file'] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.file-input-wrapper label {
+  display: inline-block;
+  padding: 15px 25px;
+  background: rgba(221, 214, 254, 0.3);
+  color: #4a3f8f;
+  border-radius: 8px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.main-form .file-name {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #4a3f8f;
+  text-align: center;
+  word-break: break-all;
+}
+
+.main-form section {
+  margin-bottom: 25px;
+}
+
+.main-form section label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #4a3f8f;
+}
+
+ul.file-view {
+  list-style-type: none;
+  font-size: 1.25rem;
+}
+
+ul.file-view a {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  justify-content: space-around;
+}
+
+ul.file-view li {
+  width: 100%;
+  padding: 8px 0;
+  border-top: solid #333;
+  transition: background-color 0.3s ease;
+}
+
+ul.file-view li:last-of-type {
+  border-bottom: solid #333;
+}
+
+ul.file-view li:hover {
+  background-color: var(--third-color);
 }

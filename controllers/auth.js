@@ -76,7 +76,7 @@ exports.signupPost = [
 ];
 
 exports.loginPost = passport.authenticate('local', {
-  successRedirect: '/root',
+  successRedirect: '/folder',
   failureRedirect: '/login',
   failureMessage: true,
 });

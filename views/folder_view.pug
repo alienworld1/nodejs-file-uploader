@@ -2,14 +2,18 @@ extends root_layout
 
 block root_content
   if files.length != 0
-    p Welcome, #{currentUser.username}!
+    ul.file-view
+      each file in files 
+        li
+          a(href=folderUrl+file.link)
+            div #{file.name}
+            div #{file.size} bytes
   else
-    .no-files-main
-      .no-files-dialog 
-        p You currently have no files or folders stored here.
-        nav 
-          ul
-            li 
-              a(href="upload-file") Upload a file 
-            li 
-              a(href="create") Create a new folder
+    .no-files-dialog.center-screen 
+      p You currently have no files or folders stored here.
+      nav 
+        ul
+          li.button-link 
+            a(href=folderUrl + 'upload-file') Upload a file 
+          li.button-link 
+            a(href=folderUrl + 'create') Create a new folder

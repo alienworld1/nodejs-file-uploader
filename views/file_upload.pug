@@ -1,0 +1,15 @@
+extends root_layout 
+
+block root_content 
+  .center-screen
+    form.main-form(action="", method="post" enctype="multipart/form-data") 
+      h2 Upload your file here
+      section
+        .file-input-container
+          .file-input-wrapper
+            label(for="file") Choose a file:
+            input#file-input(type="file", name="file")
+          .file-name#file-name
+        if error
+          .error #{error}
+      button(type="submit") Upload  
