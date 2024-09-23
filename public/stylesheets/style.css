@@ -65,7 +65,7 @@ h1.logo {
 h2 {
   color: var(--primary-color);
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 16px;
   font-weight: 600;
 }
 
@@ -339,4 +339,29 @@ ul.file-view li:last-of-type {
 
 ul.file-view li:hover {
   background-color: var(--third-color);
+}
+
+.file-details {
+  background-color: #33333366;
+  padding: 24px;
+  border-radius: 20px;
+  border: 2px solid var(--primary-color);
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.file-details > a {
+  background-color: var(--third-color);
+  color: var(--primary-color);
+  font-size: 1.15rem;
+  text-decoration: none;
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.file-details > a:hover {
+  background-color: #d8b4fe;
 }

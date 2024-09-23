@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler');
+const { DateTime } = require('luxon');
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
@@ -25,5 +26,6 @@ exports.getFileDetails = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.render('file_view', { title: file.name, file });
+  const formattedDate = DateTime.fromJSDate(file.createdAt).toLocaleString();
+  res.render('file_view', { title: file.name, file, formattedDate });
 });

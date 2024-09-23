@@ -4,6 +4,6 @@ block root_content
   .center-screen 
     .file-details 
       h2= file.name 
-      p Size:  #{file.size}
-      p Created At: #{file.createdAt}
-      button Download
+      p Size:  #{file.size} bytes
+      p Created At: #{formattedDate}
+      a(href=file.id+'/download') Download
