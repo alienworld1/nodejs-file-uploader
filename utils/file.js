@@ -2,6 +2,9 @@
 // Later, a cloud storage platform will be implemented
 // ! Do not store file data in Postgres directly
 
+const path = require('path');
+const fs = require('fs/promises');
+
 const { PrismaClient } = require('@prisma/client');
 const { getFilesWithLinks } = require('@prisma/client/sql');
 
@@ -25,3 +28,8 @@ exports.fetchFilesInFolder = async folderid => {
 
 exports.generateFolderUrl = folderid => `/folder/${folderid}/`;
 exports.generateFileUrl = fileid => `/file/${fileid}`;
+
+exports.deleteFileFromCloud = async file => {
+  const filePath = path.resolve(__dirname, '..', file.path);
+  await fs.unlink(filePath);
+};

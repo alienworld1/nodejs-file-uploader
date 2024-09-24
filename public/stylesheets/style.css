@@ -365,3 +365,38 @@ ul.file-view li:hover {
 .file-details > a:hover {
   background-color: #d8b4fe;
 }
+
+.main-form button.delete {
+  background-color: #dc2626;
+  color: #fef2f2;
+  transition: background-color 0.3s ease;
+}
+
+.main-form button.delete:hover {
+  background-color: #ef4444;
+}
+
+.main-form h3 {
+  text-align: center;
+  padding-bottom: 16px;
+  color: var(--primary-color);
+  font-weight: 400;
+}
+
+.main-form a {
+  margin-top: 16px;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10px;
+  border: 2px solid #dc2626;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  color: #dc2626;
+  transition: all 0.3s ease;
+}
+
+.main-form a:hover {
+  background-color: #fecacaaa;
+  color: #0c0a09;
+}
