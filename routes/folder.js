@@ -15,6 +15,9 @@ router.use('/:folderid', (req, res, next) => {
 
 router.get('/:folderid', folderController.folderGetById);
 
+router.get('/:folderid/create', folderController.folderCreateGet);
+router.post('/:folderid/create', folderController.folderCreatePost);
+
 router.use('/:folderid/file', fileRouter);
 
 router.get('/:folderid/upload-file', folderController.fileUploadGet);
