@@ -323,7 +323,7 @@ ul.file-view a {
   text-decoration: none;
   color: #333;
   display: flex;
-  justify-content: space-around;
+  gap: 64px;
 }
 
 ul.file-view li {

@@ -1,11 +1,32 @@
 extends root_layout 
 
 block root_content
+  ul.file-view 
+    if !isRoot 
+      li
+        a(href='/folder/' + parentId)
+          img(src="/icons/folder.svg", alt="Folder Icon" width="32px")
+          div ..
+  if folders.length != 0
+    ul.file-view 
+      if !isRoot 
+        li
+          a(href='/folder/' + parentId)
+            img(src="/icons/folder.svg", alt="Folder Icon" width="32px")
+            div ..
+      each folder in folders 
+        li
+          a(href='/folder/' + folder.id)
+            img(src="/icons/folder.svg", alt="Folder Icon" width="32px")
+            div #{folder.name}
+
+
   if files.length != 0
     ul.file-view
       each file in files 
         li
           a(href=folderUrl+file.link)
+            img(src="/icons/file.svg", alt="File Icon" width="32px")
             div #{file.name}
             div #{file.size} bytes
   else

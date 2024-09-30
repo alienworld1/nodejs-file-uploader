@@ -24,6 +24,8 @@ exports.folderGetById = asyncHandler(async (req, res, next) => {
     select: {
       userId: true,
       name: true,
+      isRoot: true,
+      parentId: true,
     },
   });
 
@@ -40,8 +42,21 @@ exports.folderGetById = asyncHandler(async (req, res, next) => {
   }
 
   currentFolder = folderId;
-  const files = await FileManager.fetchFilesInFolder(folderId);
-  res.render('folder_view', { files, title: folder.name });
+  const [files, folders] = await Promise.all([
+    FileManager.fetchFilesInFolder(folderId),
+    prisma.folder.findMany({
+      where: {
+        parentId: folderId,
+      },
+    }),
+  ]);
+  res.render('folder_view', {
+    title: folder.name,
+    files,
+    folders,
+    isRoot: folder.isRoot,
+    parentId: folder.parentId,
+  });
 });
 
 exports.fileUploadGet = asyncHandler(async (req, res, next) => {
