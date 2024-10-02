@@ -1,12 +1,9 @@
-// Temporarily uses a local folder to store files
-// Later, a cloud storage platform will be implemented
-// ! Do not store file data in Postgres directly
-
 const path = require('path');
 const fs = require('fs/promises');
 
 const { PrismaClient } = require('@prisma/client');
 const { getFilesWithLinks } = require('@prisma/client/sql');
+const supabase = require('../utils/supabase');
 
 const prisma = new PrismaClient();
 
@@ -30,8 +27,10 @@ exports.generateFolderUrl = folderid => `/folder/${folderid}/`;
 exports.generateFileUrl = fileid => `/file/${fileid}`;
 
 const deleteFileFromCloud = async file => {
-  const filePath = path.resolve(__dirname, '..', file.path);
-  await fs.unlink(filePath);
+  const { data, error } = await supabase.storage
+    .from('file-storage')
+    .remove(file.path);
+  if (error) throw error;
 };
 
 const deleteFolder = async folder => {
@@ -71,3 +70,28 @@ const deleteFolder = async folder => {
 
 exports.deleteFileFromCloud = deleteFileFromCloud;
 exports.deleteFolder = deleteFolder;
+
+exports.uploadFileToCloud = async file => {
+  const fileBuffer = await fs.readFile(file.path);
+
+  const { data, error } = await supabase.storage
+    .from('file-storage')
+    .upload(file.filename, fileBuffer);
+  if (error) {
+    throw error;
+  }
+
+  await fs.unlink(file.path);
+  return data.path;
+};
+
+exports.downloadFileFromCloud = async file => {
+  const { data, error } = await supabase.storage
+    .from('file-storage')
+    .download(file.path);
+
+  if (error) {
+    throw error;
+  }
+  return Buffer.from(await data.arrayBuffer());
+};

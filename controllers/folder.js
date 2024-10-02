@@ -113,7 +113,10 @@ exports.fileUploadPost = [
         script: '/scripts/file-input.js',
         error: 'A file must be uploaded',
       });
+      return;
     }
+
+    const path = await FileManager.uploadFileToCloud(req.file);
 
     const file = await prisma.file.create({
       data: {
@@ -121,7 +124,7 @@ exports.fileUploadPost = [
         size: req.file.size,
         parentId: folderId,
         userId: req.user.id,
-        path: req.file.path,
+        path,
       },
     });
 

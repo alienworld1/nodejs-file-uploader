@@ -56,9 +56,11 @@ exports.downloadFile = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
+  const data = await FileManager.downloadFileFromCloud(file);
+
   // This header is used to determine the filename that is downloaded
   res.set('Content-Disposition', `attachment; filename="${file.name}"`);
-  res.sendFile(path.resolve(__dirname, '..', file.path));
+  res.send(data);
 });
 
 exports.renameGet = asyncHandler(async (req, res, next) => {
