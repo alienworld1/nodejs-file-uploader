@@ -133,3 +133,4 @@ dist
 
 # Temporary folder to store uploaded files during development
 uploads
+.vercel
