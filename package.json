@@ -4,7 +4,8 @@
   "description": "A cloud storage service, that holds files, similar to Google Drive, created with Nodejs, Express and Prisma",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",

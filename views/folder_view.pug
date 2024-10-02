@@ -5,13 +5,13 @@ block root_content
     ul
       li
         h2= title
+      li 
+        a(href=folderUrl + 'create') New Folder
       if !isRoot                         
         li 
           a(href=folderUrl + 'rename') Rename
         li 
           a(href=folderUrl + 'delete') Delete
-        li 
-          a(href=folderUrl + 'create') New Folder
   ul.file-view 
     if !isRoot 
       li
