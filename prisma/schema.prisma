@@ -26,7 +26,7 @@ model Folder {
   id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(255)
   createdAt DateTime @default(now())
-  parent    Folder?  @relation("hierarchy", fields: [parentId], references: [id])
+  parent    Folder?  @relation("hierarchy", fields: [parentId], references: [id], onDelete: Cascade)
   parentId  Int?
   subfolder Folder[] @relation("hierarchy")
   files     File[]
@@ -39,7 +39,7 @@ model File {
   id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(255)
   createdAt DateTime @default(now())
-  parent    Folder?  @relation(fields: [parentId], references: [id])
+  parent    Folder?  @relation(fields: [parentId], references: [id], onDelete: Cascade)
   parentId  Int?
   path      String   @db.VarChar(255)
   userId    Int

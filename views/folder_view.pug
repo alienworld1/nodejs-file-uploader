@@ -1,12 +1,22 @@
 extends root_layout 
 
 block root_content
+  nav.folder-options
+    ul
+      li
+        h2= title
+      if !isRoot                         
+        li 
+          a(href=folderUrl + 'rename') Rename
+        li 
+          a(href=folderUrl + 'delete') Delete
   ul.file-view 
     if !isRoot 
       li
         a(href='/folder/' + parentId)
           img(src="/icons/folder.svg", alt="Folder Icon" width="32px")
           div ..
+
   if folders.length != 0
     ul.file-view 
       if !isRoot 

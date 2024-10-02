@@ -188,3 +188,94 @@ exports.folderCreatePost = [
     res.redirect(`/folder/${folder.id}`);
   }),
 ];
+
+exports.renameGet = asyncHandler(async (req, res, next) => {
+  const { folderid } = req.params;
+  const folderId = parseInt(folderid);
+
+  const folder = await prisma.folder.findUnique({
+    where: {
+      id: folderId,
+    },
+  });
+
+  if (!folder) {
+    const err = new Error('folder not found');
+    err.status = 404;
+    return next(err);
+  }
+
+  if (folder.userId !== req.user.id) {
+    const err = new Error('Not authorized to access this folder');
+    err.status = 403;
+    return next(err);
+  }
+
+  if (folder.isRoot) {
+    const err = new Error('Cannot rename this folder');
+    err.status = 400;
+    return next(err);
+  }
+
+  res.render('folder_rename', { title: 'Rename', folder });
+});
+
+exports.renamePost = [
+  body('name')
+    .trim()
+    .isLength({ min: 1, max: 32 })
+    .withMessage(
+      "The length of the folder's name should be between 1-32 characters",
+    )
+    .matches(/^[\w\-. ]+$/)
+    .withMessage('A valid name is required'),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const { folderid } = req.params;
+    const folderId = parseInt(folderid);
+
+    const folder = await prisma.folder.findUnique({
+      where: {
+        id: folderId,
+      },
+    });
+
+    if (!folder) {
+      const err = new Error('folder not found');
+      err.status = 404;
+      return next(err);
+    }
+
+    if (folder.userId !== req.user.id) {
+      const err = new Error('Not authorized to access this folder');
+      err.status = 403;
+      return next(err);
+    }
+
+    if (folder.isRoot) {
+      const err = new Error('Cannot rename this folder');
+      err.status = 400;
+      return next(err);
+    }
+
+    if (!errors.isEmpty()) {
+      res.render('folder_rename', {
+        title: 'Rename',
+        folder,
+        error: errors.array()[0],
+      });
+      return;
+    }
+
+    await prisma.folder.update({
+      where: {
+        id: folderId,
+      },
+      data: {
+        name: req.body.name,
+      },
+    });
+
+    res.redirect('/');
+  }),
+];

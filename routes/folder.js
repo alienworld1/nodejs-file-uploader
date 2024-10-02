@@ -23,4 +23,7 @@ router.use('/:folderid/file', fileRouter);
 router.get('/:folderid/upload-file', folderController.fileUploadGet);
 router.post('/:folderid/upload-file', folderController.fileUploadPost);
 
+router.get('/:folderid/rename', folderController.renameGet);
+router.post('/:folderid/rename', folderController.renamePost);
+
 module.exports = router;

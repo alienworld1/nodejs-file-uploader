@@ -1,0 +1,12 @@
+extends root_layout 
+
+block root_content
+  .center-screen 
+    form.main-form(action="" method="post")
+      h2 Rename your folder
+      section 
+        label(for="name") Name: 
+        input(type="text", name="name" value=folder.name)
+      if error
+        .error #{error.msg}
+      button(type="submit") Rename

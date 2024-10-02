@@ -400,3 +400,29 @@ ul.file-view li:hover {
   background-color: #fecacaaa;
   color: #0c0a09;
 }
+
+nav.folder-options {
+  margin-bottom: 16px;
+  font-size: 1.3rem;
+}
+
+nav.folder-options h2 {
+  text-align: left;
+  margin: 0;
+  font-size: inherit;
+}
+
+nav.folder-options > ul {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+nav.folder-options > ul > li > a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+nav.folder-options > ul > li > a:hover {
+  text-decoration: underline;
+}
