@@ -279,3 +279,67 @@ exports.renamePost = [
     res.redirect('/');
   }),
 ];
+
+exports.deleteGet = asyncHandler(async (req, res, next) => {
+  const { folderid } = req.params;
+  const folderId = parseInt(folderid);
+
+  const folder = await prisma.folder.findUnique({
+    where: {
+      id: folderId,
+    },
+  });
+
+  if (!folder) {
+    const err = new Error('File not found');
+    err.status = 404;
+    return next(err);
+  }
+
+  if (folder.userId !== req.user.id) {
+    const err = new Error('Not authorized to view the file');
+    err.status = 403;
+    return next(err);
+  }
+
+  if (folder.isRoot) {
+    const err = new Error('Cannot delete this folder');
+    err.status = 400;
+    return next(err);
+  }
+
+  res.render('folder_delete', { title: 'Delete', folder });
+});
+
+exports.deletePost = asyncHandler(async (req, res, next) => {
+  const { folderid } = req.params;
+  const folderId = parseInt(folderid);
+
+  const folder = await prisma.folder.findUnique({
+    where: {
+      id: folderId,
+    },
+  });
+
+  if (!folder) {
+    const err = new Error('File not found');
+    err.status = 404;
+    return next(err);
+  }
+
+  if (folder.userId !== req.user.id) {
+    const err = new Error('Not authorized to view the file');
+    err.status = 403;
+    return next(err);
+  }
+
+  if (folder.isRoot) {
+    const err = new Error('Cannot delete this folder');
+    err.status = 400;
+    return next(err);
+  }
+
+  await FileManager.deleteFolder(folder);
+
+  res.redirect('/');
+});

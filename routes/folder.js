@@ -26,4 +26,7 @@ router.post('/:folderid/upload-file', folderController.fileUploadPost);
 router.get('/:folderid/rename', folderController.renameGet);
 router.post('/:folderid/rename', folderController.renamePost);
 
+router.get('/:folderid/delete', folderController.deleteGet);
+router.post('/:folderid/delete', folderController.deletePost);
+
 module.exports = router;

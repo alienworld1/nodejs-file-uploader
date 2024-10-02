@@ -10,6 +10,8 @@ block root_content
           a(href=folderUrl + 'rename') Rename
         li 
           a(href=folderUrl + 'delete') Delete
+        li 
+          a(href=folderUrl + 'create') New Folder
   ul.file-view 
     if !isRoot 
       li
@@ -19,11 +21,6 @@ block root_content
 
   if folders.length != 0
     ul.file-view 
-      if !isRoot 
-        li
-          a(href='/folder/' + parentId)
-            img(src="/icons/folder.svg", alt="Folder Icon" width="32px")
-            div ..
       each folder in folders 
         li
           a(href='/folder/' + folder.id)
